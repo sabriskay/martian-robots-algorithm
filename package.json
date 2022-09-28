@@ -1,0 +1,11 @@
+{
+  "name": "martian-robots",
+  "version": "1.0.0",
+  "description": "code challenge",
+  "main": "index.js",
+  "scripts": {
+    "nodejsSolution": "node ."
+  },
+  "author": "sabrina sproviero",
+  "license": "ISC"
+}
