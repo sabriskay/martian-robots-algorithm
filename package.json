@@ -4,7 +4,8 @@
   "description": "code challenge",
   "main": "index.js",
   "scripts": {
-    "nodejsSolution": "node ."
+    "runnodejs": "node .",
+    "rungo": "go run main.go"
   },
   "author": "sabrina sproviero",
   "license": "ISC"
