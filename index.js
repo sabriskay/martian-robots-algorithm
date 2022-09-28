@@ -1,3 +1,4 @@
+"use strict";
 const fs = require('fs');
 
 const HALF_PI = Math.PI/2;
@@ -27,7 +28,29 @@ function getOrientationFromAngle (angle) {
     return ANGLE_TO_ORIENTATION[angle.toFixed(2)];
 }
 
-fs.readFile('./instructions.txt', (err, data) => {
+class Mars {
+
+    constructor (xGridSize, yGridSize) {
+        this.xGridSize = xGridSize;
+        this.yGridSize = yGridSize;
+        this.positionLost = {};
+    }
+
+    addPositionLost (posX, posY) {
+        this.positionLost[`${posX} ${posY}`] =  true;
+    }
+
+}
+
+class Robot {
+    constructor (initialOrientation, instructions) {
+        this.initialOrientation = initialOrientation;
+        this.instructions = instructions;
+    }
+
+}
+
+fs.readFile('./instructions-test.txt', (err, data) => {
     if (err) {
         throw err;
     }
@@ -35,38 +58,42 @@ fs.readFile('./instructions.txt', (err, data) => {
     data = data.toString().split('\r\n');
 
     const [ GRID_SIZE_X, GRID_SIZE_Y ] = data[0].split(' ').map(Number);
-    const positionLost = {}  
+    const newMarsGrid = new Mars (GRID_SIZE_X, GRID_SIZE_Y);
+
+
 
     for (let i = 1; i < data.length; i+=2) {
+
         const initialValues = data[i].split(' ');
-        const orientation = initialValues[2];
-        const instructions = data[i+1];
+
+        const newRobot = new Robot (initialValues[2], data[i+1]);
+
         let posX = parseInt(initialValues[0]);
         let posY = parseInt(initialValues[1]);
 
-        let angle = ORIENTATION_TO_ANGLE[orientation];
-        let Robotlosted = false;
+        let angle = ORIENTATION_TO_ANGLE[newRobot.initialOrientation];
+        let robotLost = false;
 
-        for (let j = 0; j < instructions.length; j++) {
+        for (let j = 0; j < newRobot.instructions.length; j++) {
             
-            if (!Robotlosted) {
+            if (!robotLost) {
 
-                switch (instructions[j]) {
+                switch (newRobot.instructions[j]) {
                     case 'F':
         
                         let _posX = posX + Math.round(Math.cos(angle));
                         let _posY = posY + Math.round(Math.sin(angle));
         
-                        if (_posX > GRID_SIZE_X || _posY > GRID_SIZE_Y) {
-                            const hasRobotFallenBefore = !!positionLost[`${_posX} ${_posY}`] && positionLost[`${_posX} ${_posY}`] == true;
+                        if (_posX > newMarsGrid.xGridSize || _posY > newMarsGrid.yGridSize) {
 
+                            const hasRobotFallenBefore = !!newMarsGrid.positionLost[`${_posX} ${_posY}`] && newMarsGrid.positionLost[`${_posX} ${_posY}`] != undefined;
         
                             if (hasRobotFallenBefore) {
                                 continue;
                             } else {
-                                positionLost[`${_posX} ${_posY}`] = true;
+                                newMarsGrid.addPositionLost(_posX, _posY);
 
-                                Robotlosted = true;
+                                robotLost = true;
 
                                 console.log( `${posX} ${posY} ${getOrientationFromAngle(angle)} LOST`);
                                 break; 
@@ -91,13 +118,12 @@ fs.readFile('./instructions.txt', (err, data) => {
 
         }
 
-        if (Robotlosted) {
+        if (robotLost) {
             continue;
         }
-        else {
-            console.log(`${posX} ${posY} ${getOrientationFromAngle(angle)}`);
-        }
-        
+
+        console.log(`${posX} ${posY} ${getOrientationFromAngle(angle)}`);        
     }
 
-})
+});
+
