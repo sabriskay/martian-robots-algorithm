@@ -2,6 +2,14 @@
 
 ## Drafteame code-challenges:
 
+### To Start
+Note - you need have npm installed
+
+File *instructions.txt* has the input, you can edit this file to test with different scenarios.
+
+- run ```$ npm run runnodejs``` for node.js solution
+- run ```$ npm run rungo``` from golang solution
+
 ### The Problem
 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to move
@@ -66,11 +74,3 @@ LLFFFLFLFL
 3 3 N LOST
 2 3 S
 ```
-
-## To Start
-Note - you need have npm installed
-
-File *instructions.txt* has the input, you can edit this file to test with different scenarios.
-
-- run ```$ npm run runnodejs``` for node.js solution
-- run ```$ npm run rungo``` from golang solution
