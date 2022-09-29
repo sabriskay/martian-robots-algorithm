@@ -8,7 +8,7 @@ Note - you need have npm installed
 File *instructions.txt* has the input, you can edit this file to test with different scenarios.
 
 - run ```$ npm run runnodejs``` for node.js solution
-- run ```$ npm run rungo``` from golang solution
+- run ```$ npm run rungo``` from golang solution (<strong>WIP</strong>)
 
 ### The Problem
 
