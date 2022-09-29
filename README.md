@@ -3,12 +3,18 @@
 ## Drafteame code-challenges:
 
 ### To Start
-Note - you need have npm installed
 
-File *instructions.txt* has the input, you can edit this file to test with different scenarios.
+#### Before: 
+  - Install [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating) before to run the code
+  - Install the last [node version](https://www.npmjs.com/package/node) with npm
+
+
+The File *./instructions.txt* has the default input, you can edit this file to test with different scenarios.
 
 - run ```$ npm run runnodejs``` for node.js solution
 - run ```$ npm run rungo``` from golang solution (<strong>WIP</strong>)
+
+NodeJs solution is inside of *index.js* for Golang look main.go
 
 ### The Problem
 
